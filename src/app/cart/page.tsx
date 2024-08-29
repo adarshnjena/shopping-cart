@@ -107,7 +107,9 @@ const CartPage = () => {
                       </div>
                       <div className="ml-4">
                         <div className="text-sm font-medium text-gray-900 dark:text-gray-100">
-                          {product.title}
+                          {product.title.length > 20
+                            ? product.title.slice(0, 20) + " ..."
+                            : product.title}
                         </div>
                         <div className="text-sm text-gray-500 dark:text-gray-400">
                           description
