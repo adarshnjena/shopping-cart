@@ -66,7 +66,7 @@ const CartPage = () => {
       <h1 className="text-3xl font-bold mb-8 dark:text-white">
         Your Shopping Cart
       </h1>
-      <div className="border border-gray-200 rounded-lg overflow-scroll dark:border-gray-700">
+      <div className="border border-gray-200 rounded-lg md:overflow-hidden overflow-x-scroll dark:border-gray-700">
         <table className="w-full">
           <thead className="bg-gray-50 dark:bg-gray-800">
             <tr>
