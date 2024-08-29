@@ -251,10 +251,10 @@ const DeliveryPage = () => {
             {cartData.products.map((item) => (
               <div key={item.id} className="flex justify-between items-center">
                 <div className="text-gray-700 dark:text-gray-300">
-                  {item.title} x {item.quantity}
+                  {item.title} x {item.quantity.toFixed(2)}
                 </div>
                 <div className="font-semibold text-gray-900 dark:text-gray-100">
-                  ${item.price * item.quantity}
+                  ${(item.price * item.quantity).toFixed(2)}
                 </div>
               </div>
             ))}
