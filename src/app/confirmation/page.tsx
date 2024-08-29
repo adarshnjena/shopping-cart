@@ -14,6 +14,7 @@ const OrderConfirmationPage = () => {
     orderStatus,
     setOrderStatus,
     clearCart,
+    paymentCompleted,
   } = useCheckoutStore();
   const router = useRouter();
 
@@ -38,12 +39,16 @@ const OrderConfirmationPage = () => {
     return <div>Loading...</div>;
   }
 
+  if (!paymentCompleted) {
+    router.push("/payment");
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="container mx-auto px-4 py-8"
+      className="container mx-auto px-4 py-8 dark:text-white"
     >
       <h1 className="text-3xl font-bold mb-8">Order Confirmation</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -51,7 +56,7 @@ const OrderConfirmationPage = () => {
           initial={{ x: -20, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ delay: 0.2 }}
-          className="border border-gray-200 rounded-lg p-6"
+          className="border border-gray-200 rounded-lg p-6 dark:border-gray-700 dark:bg-gray-800"
         >
           <h2 className="text-xl font-semibold mb-4">Order Status</h2>
           {!orderStatus ? (
@@ -89,7 +94,7 @@ const OrderConfirmationPage = () => {
             whileHover={{ scale: 1.009 }}
             whileTap={{ scale: 0.95 }}
             onClick={handleContinueShopping}
-            className="w-full mt-6 bg-black text-white py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors"
+            className="w-full mt-6 bg-black text-white py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors dark:bg-gray-900 dark:hover:bg-gray-700"
           >
             Continue Shopping
           </motion.button>
@@ -98,7 +103,7 @@ const OrderConfirmationPage = () => {
           initial={{ x: 20, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ delay: 0.4 }}
-          className="border border-gray-200 rounded-lg p-6"
+          className="border border-gray-200 rounded-lg p-6 dark:border-gray-700 dark:bg-gray-800"
         >
           <h2 className="text-xl font-semibold mb-4">Order Details</h2>
           <div className="space-y-4">
@@ -119,7 +124,7 @@ const OrderConfirmationPage = () => {
                 {paymentMethod === "card"
                   ? "Credit/Debit Card"
                   : paymentMethod === "upi"
-                  ? "PayPal"
+                  ? "UPI"
                   : "Cash on Delivery"}
               </p>
             </div>
@@ -136,7 +141,7 @@ const OrderConfirmationPage = () => {
                   <span>${(item.price * item.quantity).toFixed(2)}</span>
                 </div>
               ))}
-              <div className="border-t border-gray-200 my-2"></div>
+              <div className="border-t border-gray-200 my-2 dark:border-gray-600"></div>
               <div className="flex justify-between font-semibold">
                 <span>Total:</span>
                 <span>${cartData.discountedTotal.toFixed(2)}</span>

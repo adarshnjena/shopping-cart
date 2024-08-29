@@ -41,10 +41,15 @@ const CartPage = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="flex flex-col items-center justify-center h-[70vh]"
+        className="flex flex-col items-center justify-center h-[70vh] dark:bg-gray-900"
       >
-        <h2 className="text-2xl font-bold mb-4">Your cart is empty</h2>
-        <Link href="/" className="text-blue-600 hover:text-blue-800 underline">
+        <h2 className="text-2xl font-bold mb-4 dark:text-white">
+          Your cart is empty
+        </h2>
+        <Link
+          href="/"
+          className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-600 underline"
+        >
           Continue Shopping
         </Link>
       </motion.div>
@@ -56,28 +61,30 @@ const CartPage = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="container mx-auto px-4 py-8"
+      className="container mx-auto px-4 py-8 dark:bg-gray-900"
     >
-      <h1 className="text-3xl font-bold mb-8">Your Shopping Cart</h1>
-      <div className="border border-gray-200 rounded-lg overflow-hidden">
+      <h1 className="text-3xl font-bold mb-8 dark:text-white">
+        Your Shopping Cart
+      </h1>
+      <div className="border border-gray-200 rounded-lg overflow-hidden dark:border-gray-700">
         <table className="w-full">
-          <thead className="bg-gray-50">
+          <thead className="bg-gray-50 dark:bg-gray-800">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-400">
                 Product
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-400">
                 Quantity
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-400">
                 Price
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-400">
                 Actions
               </th>
             </tr>
           </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
+          <tbody className="bg-white divide-y divide-gray-200 dark:bg-gray-900 dark:divide-gray-700">
             <AnimatePresence>
               {cartData.products.map((product) => (
                 <motion.tr
@@ -99,10 +106,12 @@ const CartPage = () => {
                         />
                       </div>
                       <div className="ml-4">
-                        <div className="text-sm font-medium text-gray-900">
+                        <div className="text-sm font-medium text-gray-900 dark:text-gray-100">
                           {product.title}
                         </div>
-                        <div className="text-sm text-gray-500">description</div>
+                        <div className="text-sm text-gray-500 dark:text-gray-400">
+                          description
+                        </div>
                       </div>
                     </div>
                   </td>
@@ -117,11 +126,11 @@ const CartPage = () => {
                             Math.max(1, product.quantity - 1)
                           )
                         }
-                        className="px-2 py-1 border border-gray-300 rounded-l-md"
+                        className="px-2 py-1 border border-gray-300 rounded-l-md dark:border-gray-600 dark:bg-gray-800"
                       >
                         -
                       </motion.button>
-                      <span className="px-4 py-1 border-t border-b border-gray-300">
+                      <span className="px-4 py-1 border-t border-b border-gray-300 dark:border-gray-600 dark:bg-gray-800">
                         {product.quantity}
                       </span>
                       <motion.button
@@ -133,13 +142,13 @@ const CartPage = () => {
                             product.quantity + 1
                           )
                         }
-                        className="px-2 py-1 border border-gray-300 rounded-r-md"
+                        className="px-2 py-1 border border-gray-300 rounded-r-md dark:border-gray-600 dark:bg-gray-800"
                       >
                         +
                       </motion.button>
                     </div>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
                     ${(product.price * product.quantity).toFixed(2)}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
@@ -147,7 +156,7 @@ const CartPage = () => {
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.9 }}
                       onClick={() => removeProduct(product.id)}
-                      className="text-red-600 hover:text-red-900"
+                      className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-600"
                     >
                       Remove
                     </motion.button>
@@ -162,32 +171,34 @@ const CartPage = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
-        className="mt-8 border border-gray-200 rounded-lg p-6"
+        className="mt-8 border border-gray-200 rounded-lg p-6 dark:border-gray-700 dark:bg-gray-800"
       >
-        <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
-        <div className="flex justify-between mb-2">
+        <h2 className="text-xl font-semibold mb-4 dark:text-white">
+          Order Summary
+        </h2>
+        <div className="flex justify-between mb-2 dark:text-gray-300">
           <span>Subtotal:</span>
           <span>${cartData.total.toFixed(2)}</span>
         </div>
-        <div className="flex justify-between mb-2 text-green-600">
+        <div className="flex justify-between mb-2 text-green-600 dark:text-green-400">
           <span>Discount:</span>
           <span>
             -${(cartData.total - cartData.discountedTotal).toFixed(2)}
           </span>
         </div>
-        <div className="border-t border-gray-200 my-4"></div>
-        <div className="flex justify-between text-xl font-semibold">
+        <div className="border-t border-gray-200 my-4 dark:border-gray-600"></div>
+        <div className="flex justify-between text-xl font-semibold dark:text-gray-100">
           <span>Total:</span>
           <span>${cartData.discountedTotal.toFixed(2)}</span>
         </div>
-        <p className="text-sm text-gray-500 mt-2">
+        <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
           Shipping will be calculated in the next step
         </p>
         <Link href="/delivery">
           <motion.button
             whileHover={{ scale: 1.009 }}
             whileTap={{ scale: 0.95 }}
-            className="w-full bg-black text-white py-3 rounded-lg font-semibold mt-6 hover:bg-gray-800 transition-colors"
+            className="w-full bg-black text-white py-3 rounded-lg font-semibold mt-6 hover:bg-gray-800 dark:bg-gray-700 dark:hover:bg-gray-600 transition-colors"
           >
             Checkout
           </motion.button>

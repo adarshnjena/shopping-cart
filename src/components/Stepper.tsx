@@ -21,7 +21,7 @@ const steps = [
   { icon: FaCheckCircle, label: "Confirmation", path: "/confirmation" },
 ];
 
-const Stepper: React.FC<StepperProps> = ({ currentStep }) => {
+const Stepper = ({ currentStep }: StepperProps) => {
   const router = useRouter();
   const { completedSteps } = useCheckoutStore();
 
@@ -36,11 +36,11 @@ const Stepper: React.FC<StepperProps> = ({ currentStep }) => {
     <div className="w-full mb-12 mt-8 relative">
       {/* Connecting Lines */}
       <div
-        className="absolute top-4 left-0 h-0.5 bg-gray-300"
+        className="absolute top-6 left-0 h-0.5 bg-gray-300 dark:bg-gray-700"
         style={{ width: `calc(100% - 32px)` }}
       />
       <div
-        className="absolute top-4 left-0 h-0.5 bg-black transition-all duration-300 ease-in-out"
+        className="absolute top-6 left-0 h-0.5 bg-black dark:bg-gray-300 transition-all duration-300 ease-in-out"
         style={{ width: `${(currentStep - 1) * 32}%` }}
       />
 
@@ -52,12 +52,12 @@ const Stepper: React.FC<StepperProps> = ({ currentStep }) => {
               className={`w-12 h-12 rounded-full flex items-center justify-center cursor-pointer z-10
                 ${
                   index + 1 <= currentStep
-                    ? "bg-black text-white"
-                    : "bg-white text-gray-400 border-2 border-gray-300"
+                    ? "bg-black text-white dark:bg-gray-200 dark:text-black"
+                    : "bg-white text-gray-400 dark:bg-gray-600 dark:text-gray-300 border-2 border-gray-300 dark:border-gray-500"
                 }
                 ${
                   index + 1 <= Math.max(...completedSteps, currentStep)
-                    ? "hover:bg-gray-800"
+                    ? "hover:bg-gray-800 dark:hover:bg-gray-500"
                     : "cursor-not-allowed"
                 }
               `}
@@ -67,7 +67,9 @@ const Stepper: React.FC<StepperProps> = ({ currentStep }) => {
             </div>
             <span
               className={`mt-2 text-xs font-medium ${
-                index + 1 <= currentStep ? "text-black" : "text-gray-400"
+                index + 1 <= currentStep
+                  ? "text-black dark:text-gray-100"
+                  : "text-gray-400 dark:text-gray-500"
               }`}
             >
               {step.label}

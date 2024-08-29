@@ -18,6 +18,8 @@ interface CheckoutState {
   clearCart: () => void;
   completedSteps: number[];
   setCompletedStep: (step: number) => void;
+  paymentCompleted: boolean;
+  setPaymentCompleted: (status: boolean) => void;
 }
 
 export const useCheckoutStore = create<CheckoutState>()(
@@ -110,6 +112,8 @@ export const useCheckoutStore = create<CheckoutState>()(
             : [...state.completedSteps, step].sort((a, b) => a - b);
           return { completedSteps: newCompletedSteps };
         }),
+      paymentCompleted: false,
+      setPaymentCompleted: (status) => set({ paymentCompleted: status }),
     }),
     {
       name: "checkout-store",
