@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { FaCheckCircle, FaTimesCircle, FaSpinner } from "react-icons/fa";
 import { useCheckoutStore } from "@/store/store";
 
-const PaymentResultPage = () => {
+const PaymentResult = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [paymentStatus, setPaymentStatus] = useState<string | null>(null);
@@ -110,6 +110,14 @@ const PaymentResultPage = () => {
         renderStatusContent()
       )}
     </div>
+  );
+};
+
+const PaymentResultPage = () => {
+  return (
+    <Suspense>
+      <PaymentResult />
+    </Suspense>
   );
 };
 
