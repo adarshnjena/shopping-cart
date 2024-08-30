@@ -7,13 +7,15 @@ import { Address, CartData } from "@/types/shop";
 interface CheckoutState {
   cartData: CartData | null;
   address: Address | null;
-  paymentMethod: "upi" | "card" | "cod" | null;
+  paymentMethod: "card" | "upi" | "netbanking" | "wallet" | "cod" | null;
   orderStatus: "success" | "failure" | "pending" | null;
   setCartData: (data: CartData) => void;
   updateProductQuantity: (productId: number, quantity: number) => void;
   removeProduct: (productId: number) => void;
   setAddress: (address: Address) => void;
-  setPaymentMethod: (method: "upi" | "card" | "cod") => void;
+  setPaymentMethod: (
+    method: "card" | "upi" | "netbanking" | "wallet" | "cod" | null
+  ) => void;
   setOrderStatus: (status: "success" | "failure" | "pending") => void;
   clearCart: () => void;
   completedSteps: number[];
