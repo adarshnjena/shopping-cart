@@ -1,6 +1,6 @@
 # E-commerce Checkout Process
 
-This project is a Next.js application that implements a multi-step checkout process for an e-commerce platform. It features a shopping cart, delivery details form, payment processing, and order confirmation.
+This project is a Next.js application that implements a multi-step checkout process for an e-commerce platform. It features a shopping cart, delivery details form, payment processing with Cashfree integration, and order confirmation.
 
 ## Features
 
@@ -8,8 +8,10 @@ This project is a Next.js application that implements a multi-step checkout proc
 - Dark mode support
 - Multi-step checkout process with a dynamic stepper
 - State management using Zustand
-- Payment integration with Stripe
+- Payment integration with Cashfree
 - Server-side rendering with Next.js
+- Multiple payment options including UPI, credit/debit cards, and net banking
+- Real-time payment status updates
 
 ## Project Structure
 
@@ -21,13 +23,21 @@ This project is a Next.js application that implements a multi-step checkout proc
 ├── src
 │   ├── app
 │   │   ├── api
-│   │   │   └── cart
+│   │   │   ├── cart
+│   │   │   │   └── route.ts
+│   │   │   ├── create-cashfree-order
+│   │   │   │   └── route.ts
+│   │   │   ├── create-payment-session
+│   │   │   │   └── route.ts
+│   │   │   └── payment-result
 │   │   │       └── route.ts
 │   │   ├── cart
 │   │   │   └── page.tsx
 │   │   ├── confirmation
 │   │   ├── delivery
 │   │   ├── payment
+│   │   ├── payment-result
+│   │   │   └── page.tsx
 │   │   ├── favicon.ico
 │   │   ├── globals.css
 │   │   ├── layout.tsx
@@ -83,8 +93,9 @@ This project is a Next.js application that implements a multi-step checkout proc
 3. Set up environment variables:
    Create a `.env.local` file in the root directory and add the following:
    ```
-   NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=your_stripe_publishable_key
-   API_URL=your_api_url
+   NEXT_PUBLIC_BASE_URL=http://localhost:3000
+   CASHFREE_APP_ID=your_cashfree_app_id
+   CASHFREE_SECRET_KEY=your_cashfree_secret_key
    ```
 
 ### Running the Application
@@ -116,11 +127,11 @@ This project is a Next.js application that implements a multi-step checkout proc
 
 3. Payment Integration
 
-   - Utilized Stripe for secure payment processing, focusing on card payments.
-   - Note: Stripe was chosen as the payment gateway, which does not provide UPI transactions. For those who provided UPI transactions, KYC was required, which was beyond the scope of this project.
+   - Integrated Cashfree for secure and versatile payment processing.
+   - Implemented multiple payment options including UPI (with QR code, collect, and intent methods), credit/debit cards, and net banking.
 
 4. Order Confirmation
-   - Implemented a randomized order status (Success, Failure, Pending) to simulate real-world scenarios.
+   - Implemented real-time payment status checking and updates.
    - Displayed comprehensive order details for user reference.
 
 ## Implementation Challenges
@@ -137,8 +148,8 @@ This project is a Next.js application that implements a multi-step checkout proc
 
 3. Payment Integration
 
-   - Challenge: Implementing a secure and user-friendly payment process.
-   - Solution: Integrated Stripe's React components and APIs, ensuring PCI compliance and a smooth payment experience.
+   - Challenge: Implementing a secure and user-friendly payment process with multiple options.
+   - Solution: Integrated Cashfree's API and implemented custom UI components to handle various payment methods, ensuring a smooth and flexible payment experience.
 
 4. Form Validation
 
@@ -151,9 +162,14 @@ This project is a Next.js application that implements a multi-step checkout proc
    - Solution: Leveraged Next.js's built-in optimizations and implemented code splitting to reduce initial load times.
 
 6. Theme Switching
+
    - Challenge: Implementing a seamless light/dark mode switch without disrupting the user experience.
    - Solution: Used a combination of Tailwind CSS and React context to manage theme changes dynamically.
 
+7. Payment Status Handling
+   - Challenge: Managing and displaying real-time payment status updates.
+   - Solution: Implemented a polling mechanism to check payment status and update the UI accordingly, providing users with immediate feedback on their transactions.
+
 ## Conclusion
 
-The implementation of this e-commerce checkout process focused on creating a user-friendly, responsive, and secure experience. By leveraging modern web technologies and focusing on smooth user interactions, we aimed to create a checkout flow that is both efficient and enjoyable for users. The challenges faced during development were addressed through careful planning, appropriate technology choices, and iterative problem-solving.
+The implementation of this e-commerce checkout process focused on creating a user-friendly, responsive, and secure experience. By integrating Cashfree and leveraging modern web technologies, we've created a flexible and efficient checkout flow that supports multiple payment methods. The challenges faced during development were addressed through careful planning, appropriate technology choices, and iterative problem-solving, resulting in a robust and scalable solution for e-commerce transactions.
