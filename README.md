@@ -84,6 +84,7 @@ This project is a Next.js application that implements a multi-step checkout proc
    Create a `.env.local` file in the root directory and add the following:
    ```
    NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=your_stripe_publishable_key
+   API_URL=your_api_url
    ```
 
 ### Running the Application
